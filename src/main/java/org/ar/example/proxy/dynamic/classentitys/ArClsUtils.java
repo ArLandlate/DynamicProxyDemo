@@ -29,6 +29,12 @@ public class ArClsUtils {
 			isInnerClass = simpleName.length() != innerName.length();
 			outerQualifiedName = path + "." + outerName;
 		}
+		public void setGeneric(ClassName generic) {
+			this.generic = generic;
+		}
+		public String getGenericSimpleName() {
+			return simpleName + (null==generic?"":"<"+generic.simpleName+">");
+		}
 		public final Class<?> cls;
 		public final String typeName;				//com.example.JavaDemo.spring.demo004.classentitys.ArSignal$test$tt
 		public final String canonicalName;		//com.example.JavaDemo.spring.demo004.classentitys.ArSignal.test.tt
@@ -39,6 +45,7 @@ public class ArClsUtils {
 		public final String innerName;			//tt
 		public final boolean isInnerClass;		//true
 		public final boolean isArray;				//false
+		private ClassName generic;						//泛型<String>
 	}
 	
 	//封装一个参数对象
@@ -50,9 +57,13 @@ public class ArClsUtils {
 		public final ClassName cls;
 		public final String name;
 		
+		public Parameter addGenericAnd(Class<?> generic) {
+			cls.setGeneric(ArClsUtils.newClassNameInstance(generic));
+			return this;
+		}
 		@Override
 		public String toString() {
-			return cls.simpleName + " " + name;
+			return cls.getGenericSimpleName() + " " + name;
 		}
 	}
 	
@@ -118,7 +129,7 @@ public class ArClsUtils {
 				return null;
 			}
 		}
-		return cls.path.startsWith("java.lang")	//lang包不需要引
+		return cls.path.equals("java.lang")	//lang包不需要引
 				||currentPath.equals(cls.path)	//同路径不需要引
 				?null:ArSignal.IMPORT+" "+cls.outerQualifiedName+";";	//去掉内部类
 	}

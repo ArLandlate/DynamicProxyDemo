@@ -51,6 +51,10 @@ public class ArMethod {
 	public Class<?> getReturnType() {
 		return returnType.cls;
 	}
+	
+	public ArClsUtils.ClassName getReturnTypeClassName() {
+		return returnType;
+	}
 
 	public void setReturnType(Class<?> returnType) {
 		this.baseType = null;
@@ -222,7 +226,7 @@ public class ArMethod {
 		if(null!=parameters) {
 			for (int i = 0; i < parameters.length; i++) {
 				ArClsUtils.Parameter pm = parameters[i];
-				pmStr.append(pm.cls.simpleName);
+				pmStr.append(pm.cls.getGenericSimpleName());
 				pmStr.append(pm.cls.isArray?"[] ":" ");
 				pmStr.append(pm.name);
 				pmStr.append(i!=(parameters.length-1)?", ":"");

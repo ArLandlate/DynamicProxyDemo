@@ -47,21 +47,23 @@ public class ArSignal {
 	
 	public enum BaseType {
 		
-		INT("int"),
-		BYTE("byte"),
-		LONG("long"),
-		SHORT("short"),
-		CHAR("char"),
-		FLOAT("float"),
-		DOUBLE("double"),
-		BOOLEAN("boolean"),
-		VOID("void"),
-		CONSTRUCTOR("");
+		INT("int", "0"),
+		BYTE("byte", "0"),
+		LONG("long", "0"),
+		SHORT("short", "0"),
+		CHAR("char", "\'0\'"),
+		FLOAT("float", "0.0f"),
+		DOUBLE("double", "0.0"),
+		BOOLEAN("boolean", "false"),
+		VOID("void", ""),
+		CONSTRUCTOR("", "");
 		
 		public final String v;
+		public final String defaultVal;
 		
-		private BaseType(String v) {
+		private BaseType(String v, String defaultVal) {
 			this.v = v;
+			this.defaultVal = defaultVal;
 		}
 		
 	}

@@ -131,6 +131,12 @@ public class ArField {
 		this.clazz = ArClsUtils.newClassNameInstance(clazz);
 		return this;
 	}
+	
+	public ArField setClazzGenericAnd(Class<?> clazz) {
+		this.baseType = null;
+		this.clazz.setGeneric(ArClsUtils.newClassNameInstance(clazz));
+		return this;
+	}
 
 	public ArField setNameAnd(String name) {
 		this.name = name;
@@ -243,7 +249,7 @@ public class ArField {
 	
 	@Override
 	public String toString() {
-		String clsName = isBaseType()?baseType.v:clazz.simpleName;
+		String clsName = isBaseType()?baseType.v:clazz.getGenericSimpleName();
 		return permission.v + " "
 				+ (isStatic?(ArSignal.Others.STATIC.v+" "):"")
 				+ (isFinal?(ArSignal.Others.FINAL.v+" "):"")
