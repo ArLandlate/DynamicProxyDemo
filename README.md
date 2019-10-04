@@ -1,5 +1,5 @@
 # DynamicProxyDemo
-A serious of my proxy demo
+A series of my proxy demo
 
 为帮助自己理解动态代理（聚合方式）
 
